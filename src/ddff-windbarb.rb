@@ -19,12 +19,18 @@ class WindBarb
     @img.center
     @img.move upwind, ofs
     @img.line upwind + 70, 6
+    @img.center
+    @img.move upwind, ofs - 0.5
+    @img.line upwind + 70, 6
     ofs - 3
   end
   
   def long_barb ofs
     @img.center
     @img.move upwind, ofs
+    @img.line upwind + 70, 10
+    @img.center
+    @img.move upwind, ofs - 0.5
     @img.line upwind + 70, 10
     ofs - 3
   end
@@ -49,8 +55,14 @@ class WindBarb
       @img.circle 5
     when 1...8
       @img.line upwind, 25
+      @img.center
+      @img.move upwind - 90, 0.7
+      @img.line upwind, 25
       short_barb 20
     when 8...300
+      @img.line upwind, 25
+      @img.center
+      @img.move upwind - 90, 0.7
       @img.line upwind, 25
       ticks = ((@f + 2.5) / 5).floor
       t50 = (ticks / 10).floor
