@@ -10,12 +10,12 @@ class Draw
 
   attr_reader :size
 
-  def moveto x, y
+  def move_to x, y
     @cx, @cy = x, y
   end
 
   def center
-    moveto @size / 2, @size / 2
+    move_to @size / 2, @size / 2
   end
 
   def pixel_at x, y, c
@@ -38,8 +38,8 @@ class Draw
   end
 
   def move deg, len
-    x2 = @cx + Math.cos(deg * Math::PI / 180)
-    y2 = @cy + Math.sin(deg * Math::PI / 180)
+    x2 = @cx + Math.cos(deg * Math::PI / 180) * len
+    y2 = @cy + Math.sin(deg * Math::PI / 180) * len
     move_to(x2, y2)
   end
 
@@ -63,11 +63,15 @@ class Draw
     File.unlink(tmp)
   end
 
+  def tell io = $stderr
+    io.puts "@cx=#{@cx} @cy=#{@cy}"
+  end
+
 end
 
 if $0 == __FILE__
   d = Draw.new(64)
-  d.moveto 10, 10
+  d.move_to 10, 10
   d.line 0, 45, 0xFF0000
   d.line 120, 45, 0x00FF00
   d.line 240, 45, 0x0000FF

@@ -2,12 +2,14 @@
 
 cd $(dirname $0)
 
-dd=00
-while (( ++dd <= 1 ))
+dd=1
+while expr $dd '<=' 36 >/dev/null
 do
-  ff=00
-  while (( ( ff += 5 ) <= 95 ))
+  ff=5
+  while expr $ff '<=' 15 >/dev/null
   do
     ruby -I. ddff-windbarb.rb $dd $ff ../img/d${dd}f${ff}.png
+    ff=`expr $ff + 5`
   done
+  dd=`expr $dd + 1`
 done
