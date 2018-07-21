@@ -10,6 +10,10 @@ class Draw
 
   attr_reader :size
 
+  def cursor
+    [@cx, @cy]
+  end
+
   def move_to x, y
     @cx, @cy = x, y
   end
@@ -27,6 +31,7 @@ class Draw
   end
 
   def line_toward dx, dy, c = 0
+    $stderr.puts "line_toward(dx=#{dx}, dy=#{dy}, #{c})" if $DEBUG
     len = ([dx.abs, dy.abs].max * 3 / 2).ceil
     len.times { |i|
       ux = @cx + dx * i / len
@@ -35,6 +40,13 @@ class Draw
     }
     @cx += dx
     @cy += dy
+  end
+
+  def line_to x, y, c = 0
+    $stderr.puts "line_to(x=#{x}, y=#{y}, #{c})" if $DEBUG
+    dx = x - @cx
+    dy = y - @cy
+    line_toward dx, dy, c
   end
 
   def move deg, len
