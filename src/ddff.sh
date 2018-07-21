@@ -6,7 +6,7 @@ dd=1
 while expr $dd '<=' 36 >/dev/null
 do
   ff=5
-  while expr $ff '<=' 15 >/dev/null
+  while expr $ff '<=' 45 >/dev/null
   do
     ruby -I. ddff-windbarb.rb $dd $ff ../img/d${dd}f${ff}.png
     ff=`expr $ff + 5`
