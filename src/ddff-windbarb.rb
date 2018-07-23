@@ -18,28 +18,28 @@ class WindBarb
   def short_barb ofs
     @img.center
     @img.move upwind, ofs
-    @img.line upwind + 70, 4
+    @img.line upwind + 70, 6
     ofs - 3
   end
   
   def long_barb ofs
     @img.center
     @img.move upwind, ofs
-    @img.line upwind + 70, 7
+    @img.line upwind + 70, 10
     ofs - 3
   end
 
   def pennant ofs
     @img.center
-    @img.move upwind, ofs
-    @img.line upwind + 70, 7
+    @img.move upwind, ofs + 1
+    @img.line upwind + 90, 10
     cursor = @img.cursor
-    3.times { |ishift|
+    4.times { |ishift|
       @img.center
       @img.move upwind, ofs - ishift
       @img.line_to(*cursor)
     }
-    ofs - 4
+    ofs - 6
   end
   
   def run
