@@ -44,11 +44,14 @@ class WindBarb
   
   def run
     @img.center
-    @img.line upwind, 25
     case @f
+    when 0
+      @img.circle 5
     when 1...8
+      @img.line upwind, 25
       short_barb 20
     when 8...300
+      @img.line upwind, 25
       ticks = ((@f + 2.5) / 5).floor
       t50 = (ticks / 10).floor
       ticks -= t50 * 10
@@ -69,6 +72,7 @@ class WindBarb
     else
       raise "i dunno f=#{@f}"
     end
+    @img.halo
     @img.savepng @fn
     $stderr.puts @fn if $stderr.tty?
   end

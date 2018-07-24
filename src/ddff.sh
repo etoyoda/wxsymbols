@@ -19,3 +19,4 @@ do
   done
   dd=`expr $dd + 1`
 done
+ruby -I. ddff-windbarb.rb 0 0 ../img/d0f0.png

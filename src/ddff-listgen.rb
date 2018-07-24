@@ -11,7 +11,7 @@ HTML
 
 ffs = (1..20).to_a.map{|i| i * 5}
 ffs += [110, 120, 130, 150, 200]
-puts "<tr><th>/</th>"
+puts "<tr><td><img src='d0f0.png'/></td>"
 ffs.each {|ff| puts "<th>ff=#{ff}</th>" }
 puts "</tr>"
 
