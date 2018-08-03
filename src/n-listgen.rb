@@ -14,6 +14,7 @@ HTML
 }
 
   puts "<tr><th>N=/</th><td><img src=\"nnil.png\" /></td></tr>"
+  puts "<tr><th>N=/ AUTO</th><td><img src=\"nauto.png\" /></td></tr>"
 
 puts <<HTML
 </table>

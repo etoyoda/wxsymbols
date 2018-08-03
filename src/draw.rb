@@ -66,6 +66,20 @@ class Draw
     }
   end
 
+  def circle_fill r
+    dim = dimcolor(@fg)
+    @size.times {|iy|
+      @size.times {|ix|
+        cr = Math::hypot(ix - @cx, iy - @cy)
+	if (cr < r) then
+	  setpixel(ix, iy, @fg)
+	elsif (cr < r + 0.4) then
+	  setpixel(ix, iy, dim)
+	end
+      }
+    }
+  end
+
   NEXT = [ [-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1] ]
 
   def halo
