@@ -9,6 +9,7 @@ class WindBarb
     @f = args[1].to_i
     @fn = args[2]
     @img = Draw.new(64)
+    @img.fg = 0x000040
   end
 
   def upwind

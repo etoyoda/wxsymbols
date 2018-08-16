@@ -8,6 +8,7 @@ class NCloudCircle
     @n = args[0]
     @fn = args[1]
     @img = Draw.new(16)
+    @img.fg = 0x000040
   end
 
   def paint n
