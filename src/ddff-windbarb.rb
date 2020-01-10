@@ -2,18 +2,25 @@
 
 require 'draw.rb'
 
+def atoi a
+  Integer(a)
+rescue
+  -1
+end
+
 class WindBarb
 
   def initialize args
-    @d = args[0].to_i
-    @f = args[1].to_i
+    @d = atoi(args[0])
+    @f = atoi(args[1])
     @fn = args[2]
     @img = Draw.new(64)
     @img.fg = 0x000040
   end
 
   def upwind
-    @d * 10 - 90
+    d = if @d < 0 then 27 else @d end
+    d * 10 - 90
   end
 
   def short_barb ofs
@@ -36,6 +43,17 @@ class WindBarb
     ofs - 3
   end
 
+  def cross ofs
+    @img.center
+    @img.move upwind, ofs
+    @img.move upwind + 45, 5
+    @img.line upwind + 45 + 180, 11
+    @img.center
+    @img.move upwind, ofs
+    @img.move upwind - 45, 5
+    @img.line upwind - 45 + 180, 11
+  end
+
   def pennant ofs
     @img.center
     @img.move upwind, ofs + 1
@@ -48,23 +66,27 @@ class WindBarb
     }
     ofs - 6
   end
+
+  def shaft
+    @img.line upwind, 25
+    @img.center
+    @img.move upwind - 90, 0.7
+    @img.line upwind, 25
+  end
   
   def run
     @img.center
     case @f
     when 0
       @img.circle 5
+    when -1
+      shaft
+      cross 25
     when 1...8
-      @img.line upwind, 25
-      @img.center
-      @img.move upwind - 90, 0.7
-      @img.line upwind, 25
+      shaft
       short_barb 20
     when 8...300
-      @img.line upwind, 25
-      @img.center
-      @img.move upwind - 90, 0.7
-      @img.line upwind, 25
+      shaft
       ticks = ((@f + 2.5) / 5).floor
       t50 = (ticks / 10).floor
       ticks -= t50 * 10
@@ -85,6 +107,7 @@ class WindBarb
     else
       raise "i dunno f=#{@f}"
     end
+    cross 10 if @d < 0
     @img.halo
     @img.savepng @fn
     $stderr.puts @fn if $stderr.tty?
