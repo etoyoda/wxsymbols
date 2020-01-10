@@ -11,7 +11,7 @@ do
     ruby -I. ddff-windbarb.rb $dd $ff ../img/d${dd}f${ff}.png
     ff=`expr $ff + 5`
   done
-  for ff in 110 120 130 150 200
+  for ff in 110 120 130 140 150 200
   do
     ruby -I. ddff-windbarb.rb $dd $ff ../img/d${dd}f${ff}.png
   done
